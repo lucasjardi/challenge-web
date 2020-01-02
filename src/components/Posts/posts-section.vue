@@ -13,10 +13,11 @@
 </template>
 
 <script>
-    import axios from 'axios'
     import PostItem from './post-item'
     import ModalPostDetails from './modal-post-details'
-    import {api_endpoint, show_modal_code} from "../../consts";
+    import { mapGetters } from 'vuex'
+    import * as consts from '../../consts'
+    import * as types from '../../store/action-types'
 
     export default {
         components: {
@@ -24,32 +25,22 @@
             ModalPostDetails
         },
 
-        data(){
-            return {
-                posts: [],
-                postsLoaded: false
-            }
-        },
-
         mounted(){
-            this.fetchPosts()
-                .then(posts=>{
-                    this.posts = posts
-                    this.postsLoaded = true
-                })
-                .catch(error=>alert(error))
+            this.$store.dispatch(types.GET_POSTS)
         },
 
         methods: {
-            fetchPosts(){
-                return new Promise((resolve,reject)=>{
-                    axios.get(api_endpoint + '/posts')
-                        .then(res=>resolve(res.data))
-                        .catch(error=>reject(error))
-                })
-            },
             showDetails(post){
-                this.$emit(show_modal_code, post)
+                this.$emit(consts.show_modal_code, post)
+            }
+        },
+
+        computed: {
+            ...mapGetters([
+                'posts',
+            ]),
+            postsLoaded(){
+                return this.posts.length > 0
             }
         }
     }

@@ -6,12 +6,7 @@
             <p v-text="post.body"></p>
             <hr>
             <p class="is-bold">Responsible</p>
-            <template v-if="userLoaded">
-                <user-details :user="user"></user-details>
-            </template>
-            <template v-else>
-                <p>Loading Responsible...</p>
-            </template>
+            <user-details :user="user"></user-details>
         </template>
         <template slot="footer">
             <button class="button is-primary" @click="close">Ok</button>
@@ -20,10 +15,12 @@
 </template>
 
 <script>
-    import axios from 'axios'
     import ModalCard from './../Util/modal-card'
     import UserDetails from './../Users/user-details'
-    import {api_endpoint, show_modal_code, post, user} from "../../consts"
+    import { mapGetters } from 'vuex'
+    import * as consts from '../../consts'
+    import * as types from '../../store/action-types'
+    import * as mutations from '../../store/mutation-types'
 
     export default {
         components: {
@@ -33,37 +30,27 @@
         data() {
             return {
                 visible: false,
-                userLoaded: false,
-                post: post,
-                user: user,
+                post: consts.post_default,
             }
         },
         mounted(){
-            this.$parent.$on(show_modal_code, post=>{
+            this.$parent.$on(consts.show_modal_code, post=>{
                 this.visible = true
                 this.post = post
-                this.getUser(post.userId)
-                    .then(user=>{
-                        this.user = user
-                        this.userLoaded = true
-                    })
-                    .catch(error=>alert(error))
+                this.$store.dispatch(types.GET_USER, post.userId)
             })
         },
         methods: {
-            getUser(userId){
-                return new Promise((resolve,reject)=>{
-                    axios.get(api_endpoint + '/users/' + userId)
-                        .then(res=>resolve(res.data))
-                        .catch(error=>reject(error))
-                })
-            },
             close(){
                 this.visible = false
-                this.userLoaded = false
-                this.post = post
-                this.user = user
+                this.post = consts.post_default
+                this.$store.commit(mutations.USER, consts.user_default)
             }
+        },
+        computed: {
+            ...mapGetters([
+                'user',
+            ])
         }
     }
 </script>
