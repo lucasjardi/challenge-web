@@ -6,7 +6,7 @@ import * as consts from '../../../consts'
 export default {
     [ actions.GET_POSTS ] (context) {
         return new Promise((resolve, reject) => {
-            axios.get(consts.api_endpoint + '/posts')
+            axios.get(consts.API_ENDPOINT + '/posts')
                 .then(response => {
                     context.commit(mutations.POSTS, response.data)
                     resolve(response)

@@ -1,12 +1,13 @@
-const api_endpoint = 'http://jsonplaceholder.typicode.com'
-const show_modal_code = 'show-modal-post-details'
-const post_default = {
+const API_ENDPOINT = 'http://jsonplaceholder.typicode.com'
+const SHOW_MODAL_DETAILS = 'show-modal-post-details'
+const SHOW_MODAL_EDIT = 'show-modal-post-edit'
+const POST_DEFAULT = {
     userId: '',
     id: '',
     title: '',
     body: '',
 }
-const user_default = {
+const USER_DEFAULT = {
     name: '',
     username: '',
     email: '',
@@ -17,4 +18,4 @@ const user_default = {
     },
 }
 
-export {api_endpoint, show_modal_code, post_default, user_default}
+export {API_ENDPOINT, SHOW_MODAL_DETAILS, SHOW_MODAL_EDIT, POST_DEFAULT, USER_DEFAULT}

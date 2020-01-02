@@ -1,10 +1,10 @@
 import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
-import {user} from "../../../consts";
+import {USER_DEFAULT} from "../../../consts";
 
 const state = {
-    user: user
+    user: USER_DEFAULT
 }
 
 export default {

@@ -6,7 +6,7 @@ import * as consts from '../../../consts'
 export default {
     [ actions.GET_USER ] (context, id) {
         return new Promise((resolve, reject) => {
-            axios.get(consts.api_endpoint + '/users/' + id)
+            axios.get(consts.API_ENDPOINT + '/users/' + id)
                 .then(response => {
                     context.commit(mutations.USER, response.data)
                     resolve(response)
