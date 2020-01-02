@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="media-right">
-            <a href="">Edit</a>
+            <a href="" @click.prevent.stop="$emit('edit-post',post)">Edit</a>
         </div>
     </article>
 </template>
