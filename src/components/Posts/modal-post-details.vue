@@ -30,11 +30,11 @@
         data() {
             return {
                 visible: false,
-                post: consts.post_default,
+                post: consts.POST_DEFAULT,
             }
         },
         mounted(){
-            this.$parent.$on(consts.show_modal_code, post=>{
+            this.$parent.$on(consts.SHOW_MODAL_DETAILS, post=>{
                 this.visible = true
                 this.post = post
                 this.$store.dispatch(types.GET_USER, post.userId)
@@ -43,8 +43,8 @@
         methods: {
             close(){
                 this.visible = false
-                this.post = consts.post_default
-                this.$store.commit(mutations.USER, consts.user_default)
+                this.post = consts.POST_DEFAULT
+                this.$store.commit(mutations.USER, consts.USER_DEFAULT)
             }
         },
         computed: {
