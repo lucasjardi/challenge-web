@@ -1,6 +1,6 @@
 <template>
     <modal-card v-if="visible" @close="close" @save="save">
-        <template slot="title">Details</template>
+        <template slot="title">Edit</template>
         <template slot="body">
             <div class="field">
                 <label class="label">Title</label>
@@ -36,18 +36,20 @@
         mounted(){
             this.$parent.$on(consts.SHOW_MODAL_EDIT, post=>{
                 this.visible = true
-                this.post = JSON.parse(JSON.stringify(post))
+                this.post = this.removeReactivity(post)
             })
         },
         methods: {
             save(){
                 if(!this.post.title || !this.post.body) return
                 this.$store.commit(mutations.UPDATE_POST, this.post)
-                this.visible = false
+                this.close()
             },
             close(){
                 this.visible = false
-                this.post = consts.POST_DEFAULT
+            },
+            removeReactivity(payload){
+                return JSON.parse(JSON.stringify(payload))
             }
         },
     }

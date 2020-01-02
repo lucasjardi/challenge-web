@@ -6,7 +6,12 @@
             <p v-text="post.body"></p>
             <hr>
             <p class="is-bold">Responsible</p>
-            <user-details :user="user"></user-details>
+            <template v-if="userLoaded">
+                <user-details :user="user"></user-details>
+            </template>
+            <template v-else>
+                Loading responsible...
+            </template>
         </template>
         <template slot="footer">
             <button class="button is-primary" @click="close">Ok</button>
@@ -50,7 +55,10 @@
         computed: {
             ...mapGetters([
                 'user',
-            ])
+            ]),
+            userLoaded(){
+                return this.user.id !== ''
+            }
         }
     }
 </script>

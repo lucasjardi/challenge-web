@@ -4,7 +4,7 @@
         <div class="modal-background" @click="$emit('close')"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title is-marginless-b"><slot name="title"></slot></p>
+                <p class="modal-card-title"><slot name="title"></slot></p>
                 <button type="button" class="delete" @click="$emit('close')"></button>
             </header>
             <section class="modal-card-body">
@@ -14,8 +14,8 @@
 
                 <slot name="custom"></slot>
                 <slot name="footer">
-                    <a class="button is-pulled-right" v-if="!hideCanceled" @click="$emit('close')">Cancel</a>
-                    <a class="button is-primary is-pulled-right" @click="$emit('save')">Save</a>
+                    <a class="button" v-if="!hideCanceled" @click="$emit('close')">Cancel</a>
+                    <a class="button is-primary" @click="$emit('save')">Save</a>
                 </slot>
             </footer>
         </div>

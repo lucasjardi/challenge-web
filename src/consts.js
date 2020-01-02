@@ -8,6 +8,7 @@ const POST_DEFAULT = {
     body: '',
 }
 const USER_DEFAULT = {
+    id: '',
     name: '',
     username: '',
     email: '',
