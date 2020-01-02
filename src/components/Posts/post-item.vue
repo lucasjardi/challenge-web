@@ -1,5 +1,10 @@
 <template>
     <article class="media is-clickable" @click="$emit('show-details',post)">
+        <div class="media-left">
+            <figure class="image is-48x48">
+                <img src="../../assets/news.png" alt="">
+            </figure>
+        </div>
         <div class="media-content">
             <div class="content">
                 <p>
